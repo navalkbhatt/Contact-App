@@ -1,0 +1,21 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.btn-group {
+  display: grid;
+  width: 150px;
+  padding: 10px 0px;
+  grid-template-columns: 1fr 1fr;
+}
+.form-control {
+  height: 40px;
+  font-size: 20px;
+}
+.btn {
+  height: 40px;
+}
