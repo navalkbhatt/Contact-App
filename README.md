@@ -1,12 +1,15 @@
 **Application Overview**
+
 The Contacts Management Application is a full-stack web application designed to manage contact information. It enables users to create, read, update, and delete (CRUD) contact entries, providing an intuitive and interactive user experience. This application is built using Angular for the frontend and .NET Core for the backend, with a local JSON file serving as a mock database for data persistence.
 
 Here's a detailed description of the Contacts Management Application based on the provided specifications:
 
 **Application Overview**
+
 The Contacts Management Application is a full-stack web application designed to manage contact information. It enables users to create, read, update, and delete (CRUD) contact entries, providing an intuitive and interactive user experience. This application is built using Angular for the frontend and .NET Core for the backend, with a local JSON file serving as a mock database for data persistence.
 
 **Application Features**
+
 1. Frontend (Angular)
 Framework: Angular (Version 13 or later)
 Styling: Bootstrap (Latest stable version) for a responsive and user-friendly UI.
