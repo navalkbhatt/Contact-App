@@ -68,4 +68,13 @@ docker build -t contactapi:v.1.0 .
 docker run --user root -e ASPNETCORE_ENVIRONMENT=Development -d -p 8080:5000 contactapi:v1.0  # Run from root or give the contact.json file read/write permission
 http://localhost:8080/swagger/index.html
 ```
-  
+### Frontend Setup
+```bash
+cd Contact-App\contactApp
+docker build -t contact-client-app:v1.0 .
+docker run -d -p 8000:80 --name contactclientApp contact-client-app:v1.0
+Browse the application  http://localhost:8000
+```
+### Running the Application
+Client and Application are running on Docker Container. These contaniner can be host on PODS in EKS/AKS Cluster. 
+   
