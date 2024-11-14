@@ -19,16 +19,10 @@ var app = builder.Build();
 //if (app.Environment.IsDevelopment())
 //{
 app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", " Contact API V.1");
-    c.RoutePrefix = string.Empty;
-});
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.AddMiddleware();
 

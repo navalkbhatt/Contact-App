@@ -1,8 +1,9 @@
 ﻿using ContactApp.Application.Dto;
 using ContactApp.Application.UseCases.Commons;
 using ContactApp.Application.UseCases.Contacts.Commands.CreateContactCommand;
+using ContactApp.Application.UseCases.Contacts.Commands.DeleteContactCommand;
+using ContactApp.Application.UseCases.Contacts.Queries.GetAllContacts;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactAppApi.Controllers.V1
@@ -14,14 +15,28 @@ namespace ContactAppApi.Controllers.V1
         private readonly IMediator _mediator;
         public ContractController(IMediator mediator)
         {
-                this._mediator = mediator;
+            this._mediator = mediator;
         }
-        [HttpPost("contacts/add")]
-        public async Task<Response<bool>> GetAllAsync()
+        [HttpGet]
+        public async Task<Response<IEnumerable<ContactDto>>> GetAllAsync()
         {
-            var response = await _mediator.Send(new CreateContactCommand());
+            var response = await _mediator.Send(new GetAllContactQuery());
 
-            return new Response<bool> { Body = response.Body};
+            return response;
+        }
+        [HttpPost]
+        public async Task<Response<bool>> AddContact([FromBody] CreateContactCommand command)
+        {
+            var response = await _mediator.Send(command);
+
+            return new Response<bool> { Body = response.Body };
+        }
+        [HttpDelete]
+        public async Task<Response<bool>> DeleteContact([FromBody] DeleteContactCommand command)
+        {
+            var response = await _mediator.Send(command);
+
+            return new Response<bool> { Body = response.Body };
         }
     }
 }

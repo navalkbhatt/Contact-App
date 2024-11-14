@@ -22,12 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contacts\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Contact.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

@@ -8,6 +8,7 @@
         public IEnumerable<BaseError> Errors { get; set; }
 
         public TBody Body { get; set; }
+        public string Message { get; set; }
 
         public bool HasBody()
         {

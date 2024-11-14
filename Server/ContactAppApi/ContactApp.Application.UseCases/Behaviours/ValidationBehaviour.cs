@@ -1,4 +1,5 @@
 ﻿using ContactApp.Application.UseCases.Commons;
+using ContactApp.Application.UseCases.Exceptions;
 using FluentValidation;
 using MediatR;
 
@@ -28,7 +29,7 @@ namespace ContactApp.Application.UseCases.Behaviours
 
                 if (failures.Any())
                 {
-                  //  throw new ValidationExceptionCustom(failures);
+                    throw new ValidationExceptionCustom(failures);
                 }
             }
 
