@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Server/ContactAppApi/.vs/ContactAppApi/FileContentIndex
+*.suo
+/Server/ContactAppApi/ContactApp.Application.UseCases/obj/Debug/net8.0
+/Server/ContactAppApi/ContactAppApi/obj/Debug/net8.0
