@@ -1,52 +1,71 @@
-**Application Overview**
+# Contact App
 
-The Contacts Management Application is a full-stack web application designed to manage contact information. It enables users to create, read, update, and delete (CRUD) contact entries, providing an intuitive and interactive user experience. This application is built using Angular for the frontend and .NET Core for the backend, with a local JSON file serving as a mock database for data persistence.
+Contact App is a web-based application that allows users to manage contact information using a .NET Core 8 backend and an Angular frontend. The application follows the Clean Architecture pattern and leverages the CQRS (Command Query Responsibility Segregation) pattern for effective separation of read and write operations. This approach ensures scalability, maintainability, and a clean codebase structure.
 
-Here's a detailed description of the Contacts Management Application based on the provided specifications:
 
-**Application Overview**
+### Table of Contents
 
-The Contacts Management Application is a full-stack web application designed to manage contact information. It enables users to create, read, update, and delete (CRUD) contact entries, providing an intuitive and interactive user experience. This application is built using Angular for the frontend and .NET Core for the backend, with a local JSON file serving as a mock database for data persistence.
 
-**Application Features**
 
-1. Frontend (Angular)
-Framework: Angular (Version 13 or later)
-Styling: Bootstrap (Latest stable version) for a responsive and user-friendly UI.
-State Management: RxJS to manage and communicate data changes within components.
-Form Handling: Utilizes Angular Reactive Forms for creating and updating contact entries with built-in validation.
-Component Communication: Implements @Input() and @Output() decorators to ensure seamless data flow between parent and child components.
-UI Features:
+* [Technologies Used](https://github.com/navalkbhatt/Contact-App#technologies-used)
+* [Project Structure](https://github.com/navalkbhatt/Contact-App#project-structure)
+* [Getting Started](https://github.com/navalkbhatt/Contact-App#getting-start)
+   - [Prerequisites](https://github.com/navalkbhatt/Contact-App#prerequisites)
+   - [Backend Setup](https://github.com/navalkbhatt/Contact-App#backend-setup)
+   - [Frontend Setup](https://github.com/navalkbhatt/Contact-App#frontend-setup)
+* [Running the Application](https://github.com/navalkbhatt/Contact-App#getting-start)
+* [Core Features](https://github.com/navalkbhatt/Contact-App#getting-start)
+* [API Documentation](https://github.com/navalkbhatt/Contact-App#getting-start)
+* [Troubleshooting](https://github.com/navalkbhatt/Contact-App#getting-start)
 
-Contacts List View: Displays a list of all contacts, with options to edit or delete each entry.
-Add Contact Form: Allows users to add a new contact, with validation for required fields and email format.
-Edit Contact Form: Enables the user to modify existing contact details.
-Feedback Mechanism: Provides real-time user feedback (e.g., success and error messages) for operations.
-2. Backend (.NET Core)
-Framework: .NET Core (Version 6 or later)
-Data Storage: Local JSON file acts as a mock database to store contact information persistently.
-Error Handling: Includes global error handling mechanisms to ensure proper error responses are sent to the frontend.
-API Endpoints:
+----------
+## Technologies Used
+* Backend: .NET Core 8
+* Frontend: Angular with Bootstrap 
+* CQRS Pattern: Implemented using the MediatR library
+* Architecture: Clean Architecture principles
+* Database: Json Files
+* API Documentation: Swagger for interactive documentation
 
-GET /api/contacts: Retrieves all contact entries.
-POST /api/contacts: Creates a new contact entry.
-PUT /api/contacts/{id}: Updates an existing contact identified by id.
-DELETE /api/contacts/{id}: Deletes a contact identified by id.
-Functional Requirements
-CRUD Operations: Users can create new contacts, view all contacts, update existing contacts, and delete contacts as needed.
-Field Validation:
-Unique IDs for each contact.
-Valid Email format check.
-Required Fields for FirstName and LastName.
-Data Model
-Id: Auto-incrementing integer (Unique identifier for each contact)
-FirstName: String (Required)
-LastName: String (Required)
-Email: String (Required, must follow a valid email format)
-Additional Features
-Performance Considerations: Scalability strategies include efficient data handling and component reusability, ensuring the application can accommodate large contact lists. Pagination or virtual scrolling can be implemented to optimize rendering of large datasets.
-Optional Features: Search, sorting, and pagination of contacts can be added to enhance usability.
-Testing & Documentation
-Testing: Optionally includes unit tests and integration tests for both frontend and backend logic.
-Documentation: A README.md file outlines setup instructions, project structure, and design rationale.
-This Contacts Management Application demonstrates best practices in modern web development by combining a responsive frontend, a robust backend, and clean code adhering to established coding standards. The use of a mock database and local storage enables easy testing and iteration during the development phase.
+## Project Structure
+  
+```bash
+ContactApp/
+  ├──Contant-App #Angular Front End
+  ├── Server
+       ├── Application  # Application layer (CQRS commands/queries)
+          ├── ContactApp.Application.Dto
+          ├── ContactApp.Application.UseCases 
+              ├── Behaviours
+              ├── Commons
+              ├── Contacts
+                  ├── Commands
+                  ├── Queries
+                  ├──    
+              ├── Exceptions
+              ├── Mapping
+
+       ├── Domain  #Domain layer (Entities, interfaces, core logic)
+         ├── Entities 
+       ├── Service
+         ├── ContactAppApi # API project (Presentation layer)
+```
+------          
+## Getting Started
+### Prerequisites
+
+Before you begin, ensure you have the following installed
+
+* [.NET SDK 8.0](https://dotnet.microsoft.com/en-us/download)
+* [Node.js and npm](https://nodejs.org/en)
+* [Angular CLI](https://angular.dev/tools/cli/setup-local)
+* [Docker](https://www.docker.com/products/docker-desktop)
+### Backend Setup
+```bash
+git clone https://github.com/navalkbhatt/Contact-App
+cd Contact-App\Server
+docker build -t contactapi:v.1.0 .
+docker run --user root -e ASPNETCORE_ENVIRONMENT=Development -d -p 8080:5000 contactapi:v1.0  # Run from root or give the contact.json file read/write permission
+http://localhost:8080/swagger/index.html
+```
+  
