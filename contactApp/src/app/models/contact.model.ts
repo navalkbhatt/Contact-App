@@ -1,5 +1,5 @@
 export interface ContactResponse {
-  Id: string;
+  Id?: string;
   FirstName: string;
   LastName: string;
   Email: string;

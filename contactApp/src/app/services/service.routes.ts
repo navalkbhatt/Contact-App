@@ -10,6 +10,6 @@ export class ServiceRoutes {
 
   constructor() {}
   contactsRoute(): string {
-    return `${this.API_URL}/api/contract`;
+    return `${this.API_URL}/api/contacts`;
   }
 }

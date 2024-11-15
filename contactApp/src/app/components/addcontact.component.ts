@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ContactService } from '../services/contact.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'add-contact',
@@ -9,7 +11,11 @@ import { Router } from '@angular/router';
 })
 export class AddContactComponent {
   userForm!: FormGroup;
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private contactService: ContactService
+  ) {}
   ngOnInit() {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -20,6 +26,14 @@ export class AddContactComponent {
 
   onSubmit() {
     if (this.userForm.valid) {
+      combineLatest([
+        this.contactService.addContact({
+          ...this.userForm.value,
+        }),
+      ]).subscribe((x) => {
+        console.log('Hello');
+      });
+
       console.log(this.userForm.value);
     }
   }

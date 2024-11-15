@@ -10,10 +10,10 @@ namespace ContactAppApi.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContractController : ControllerBase
+    public class ContactsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ContractController(IMediator mediator)
+        public ContactsController(IMediator mediator)
         {
             this._mediator = mediator;
         }

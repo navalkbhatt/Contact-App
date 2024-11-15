@@ -31,6 +31,8 @@ export function getMessagesFromHeader(
 export class WebServiceResponse<T> {
   Body!: T;
   Header!: ResponseHeader;
+  Message!: string;
+  Errors!: any;
   constructor(items?: WebServiceResponse<T>) {
     if (items) {
       this.Body = items.Body;
