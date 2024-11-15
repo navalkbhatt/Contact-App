@@ -8,6 +8,7 @@ import { ContactListComponent } from './components/contact-list-component/contac
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalWrapperComponent } from './components/modal-wrapper/modal-wrapper.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,12 @@ import { ModalWrapperComponent } from './components/modal-wrapper/modal-wrapper.
     EditContactComponent,
     ModalWrapperComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

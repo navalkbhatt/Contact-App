@@ -10,43 +10,23 @@
   <div class="grid-header">Edit</div>
   <div class="grid-header">Delete</div>
 
-  <!-- First Contact Row -->
-  <div class="grid-item">0</div>
-  <div class="grid-item">Alex</div>
-  <div class="grid-item">BlaBla</div>
-  <div class="grid-item">alex.blabla@aol.at</div>
-  <div class="grid-item">
-    <button class="edit-button">Edit</button>
-  </div>
-  <div class="grid-item">
-    <button class="delete-button">Delete</button>
-  </div>
+  <!-- Contact Rows -->
+  <ng-container *ngFor="let contact of contacts; let i = index">
+    <div class="grid-item">{{ i }}</div>
+    <!-- Display index as Id -->
+    <div class="grid-item">{{ contact.FirstName }}</div>
+    <div class="grid-item">{{ contact.LastName }}</div>
+    <div class="grid-item">{{ contact.Email }}</div>
+    <div class="grid-item">
+      <button class="edit-button" (click)="openedit()">Edit</button>
+    </div>
+    <div class="grid-item">
+      <button class="delete-button">Delete</button>
+    </div>
+  </ng-container>
 
-  <!-- Second Contact Row -->
-  <div class="grid-item">1</div>
-  <div class="grid-item">Otto</div>
-  <div class="grid-item">Blubb</div>
-  <div class="grid-item">otto.blubb@dsl.de</div>
-  <div class="grid-item">
-    <button class="edit-button">Edit</button>
+  <!-- Optional Edit Modal -->
+  <div *ngIf="enabled">
+    <edit-contact (closeModal)="closeModel()"></edit-contact>
   </div>
-  <div class="grid-item">
-    <button class="delete-button">Delete</button>
-  </div>
-
-  <!-- Third Contact Row -->
-  <div class="grid-item">2</div>
-  <div class="grid-item">Peter</div>
-  <div class="grid-item">Pan</div>
-  <div class="grid-item">peter.pan@neverland.com</div>
-  <div class="grid-item">
-    <button class="edit-button" (click)="openedit()">Edit</button>
-  </div>
-  <div class="grid-item">
-    <button class="delete-button">Delete</button>
-  </div>
-</div>
-
-<div *ngIf="enabled">
-  <edit-contact (closeModal)="closeModel()"></edit-contact>
 </div>
