@@ -18,10 +18,10 @@ builder.WebHost.UseUrls("http://*:5000");
 builder.Services.AddInjectionApplication();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost4200",
+    options.AddPolicy("AllowLocalhost8000",
         builder =>
         {
-            builder.WithOrigins("http://localhost:4200") // Specify the allowed origin
+            builder.WithOrigins("http://localhost:8000") // Specify the allowed origin
                    .AllowAnyHeader() // Allow any headers (adjust as needed)
                    .AllowAnyMethod() // Allow any HTTP methods (adjust as needed)
                    .AllowCredentials(); // Allow credentials (if applicable)
@@ -37,7 +37,7 @@ app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
-app.UseCors("AllowLocalhost4200");
+app.UseCors("AllowLocalhost8000");
 app.AddMiddleware();
 
 app.MapControllers();
