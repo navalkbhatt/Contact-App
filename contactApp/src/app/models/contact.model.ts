@@ -4,3 +4,9 @@ export interface ContactResponse {
   LastName: string;
   Email: string;
 }
+export interface EditContactDto {
+  Id: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+}

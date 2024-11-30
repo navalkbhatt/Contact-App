@@ -12,4 +12,7 @@ export class ServiceRoutes {
   contactsRoute(): string {
     return `${this.API_URL}/api/contacts`;
   }
+  editRoute(id: string): string {
+    return `${this.API_URL}/api/contacts/${id}`;
+  }
 }

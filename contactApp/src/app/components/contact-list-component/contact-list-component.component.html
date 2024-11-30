@@ -18,7 +18,19 @@
     <div class="grid-item">{{ contact.LastName }}</div>
     <div class="grid-item">{{ contact.Email }}</div>
     <div class="grid-item">
-      <button class="edit-button" (click)="openedit()">Edit</button>
+      <button
+        class="edit-button"
+        (click)="
+          openedit({
+            Id: contact.Id!,
+            FirstName: contact.FirstName,
+            LastName: contact.LastName,
+            Email: contact.Email
+          })
+        "
+      >
+        Edit
+      </button>
     </div>
     <div class="grid-item">
       <button class="delete-button">Delete</button>
@@ -27,6 +39,9 @@
 
   <!-- Optional Edit Modal -->
   <div *ngIf="enabled">
-    <edit-contact (closeModal)="closeModel()"></edit-contact>
+    <edit-contact
+      [contact]="editContact"
+      (closeModal)="closeModel()"
+    ></edit-contact>
   </div>
 </div>

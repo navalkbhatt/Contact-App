@@ -9,6 +9,10 @@ import { EditContactComponent } from './components/edit-contact/edit-contact.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalWrapperComponent } from './components/modal-wrapper/modal-wrapper.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import * as contactsReducer from './store/contact.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/enviornments/environment';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    StoreModule.forRoot({ contact: contactsReducer.reducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContactService } from '../services/contact.service';
 import { combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { ConactActions } from '../store/actions';
 
 @Component({
   selector: 'add-contact',
@@ -16,6 +18,7 @@ export class AddContactComponent {
     private fb: FormBuilder,
     private contactService: ContactService
   ) {}
+  store = inject(Store);
   ngOnInit() {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -34,6 +37,7 @@ export class AddContactComponent {
         console.log('Hello');
       });
 
+      this.store.dispatch(ConactActions.createContact(this.userForm.value));
       console.log(this.userForm.value);
     }
   }
