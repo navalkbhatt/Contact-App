@@ -4,6 +4,7 @@ on:
  pull_request:
  schedule:
    - cron: '*/1 * * * *'
+ workflow_dispatch:
 jobs:
     echo:
         runs-on: ubuntu-latest
