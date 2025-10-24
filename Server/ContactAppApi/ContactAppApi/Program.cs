@@ -10,6 +10,10 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = null;
     });
+
+// Add health checks
+builder.Services.AddHealthChecks();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,6 +43,9 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseCors("AllowLocalhost8000");
 app.AddMiddleware();
+
+// Add health check endpoint
+app.MapHealthChecks("/health");
 
 app.MapControllers();
 

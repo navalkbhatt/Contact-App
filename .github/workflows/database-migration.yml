@@ -1,0 +1,82 @@
+name: Database Migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run migrations'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      migration_action:
+        description: 'Migration action to perform'
+        required: true
+        default: 'update'
+        type: choice
+        options:
+          - update
+          - rollback
+          - info
+      target_migration:
+        description: 'Target migration (for rollback)'
+        required: false
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  PROJECT_PATH: './Server/ContactAppApi'
+
+jobs:
+  database-migration:
+    name: Database Migration
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        
+    - name: Install EF Core tools
+      run: dotnet tool install --global dotnet-ef
+      
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.PROJECT_PATH }}/ContactAppApi.sln
+      
+    - name: Build application
+      run: dotnet build ${{ env.PROJECT_PATH }}/ContactAppApi.sln --configuration Release --no-restore
+      
+    - name: Get Migration Info
+      if: ${{ github.event.inputs.migration_action == 'info' }}
+      run: |
+        echo "Getting migration information..."
+        cd ${{ env.PROJECT_PATH }}/ContactAppApi
+        dotnet ef migrations list
+        dotnet ef database list
+        
+    - name: Update Database
+      if: ${{ github.event.inputs.migration_action == 'update' }}
+      run: |
+        echo "Updating database to latest migration..."
+        cd ${{ env.PROJECT_PATH }}/ContactAppApi
+        dotnet ef database update --verbose
+        
+    - name: Rollback Database
+      if: ${{ github.event.inputs.migration_action == 'rollback' }}
+      run: |
+        echo "Rolling back database to: ${{ github.event.inputs.target_migration }}"
+        cd ${{ env.PROJECT_PATH }}/ContactAppApi
+        dotnet ef database update "${{ github.event.inputs.target_migration }}" --verbose
+        
+    - name: Verify Migration Status
+      if: always()
+      run: |
+        echo "Verifying migration status..."
+        cd ${{ env.PROJECT_PATH }}/ContactAppApi
+        dotnet ef migrations list
