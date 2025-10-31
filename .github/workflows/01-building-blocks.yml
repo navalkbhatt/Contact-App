@@ -1,20 +1,19 @@
+# Check out the repository
+# Install nodemo
 name: hello-world
 on: push
 jobs:
-  echo-hello:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: echo "Hello, World!"
-  echo-goodbye:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Success
-        run: |
-         echo "I will fail"
-          exit 0
-      - name: Say Goodbye
-        run: echo "Goodbye, World!"
-      
-
-  
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: npm install
+        working-directory: Contact-App/contactApp
+        
+        
