@@ -14,6 +14,6 @@ jobs:
           node-version: '20.x'
       - name: Install dependencies
         run: npm install
-        working-directory: Contact-App/contactApp
+        working-directory: Contact-App
         
         
